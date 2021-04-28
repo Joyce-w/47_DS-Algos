@@ -1,31 +1,28 @@
 function countZeroes(arr) {
-
-    const zeros =  arr.filter(function (num) {
-        return num === 0 
-    })
-    return zeros.length
-}
-
-// OR //
-
-function countZeroes(arr) {
-    //rule out no zeros
-    if (!arr.includes(0)) {
-        return 0
-    }
-    else {
-    //sort array
-    arr.sort()
-
-    //find last index of 0s
-    let last_idx = arr.lastIndexOf(0)
-
-    //make subarray of 0s
-    let zeros = arr.slice(0, last_idx + 1)
+    // find where  0 ends and 1 starts in sorted array 
+    let left = 0;
+    let right = arr.length - 1;
     
-    return zeros.length;        
+    if (arr[left] === 0) {
+        return arr.length;
+    }
+    if (arr[right] === 1) {
+        return 0;
     }
 
+    while (left <= right) {
+        let mid = left + Math.floor((right - left) / 2);
+        let midPlus = mid + 1
+        if (arr[mid] === 1 && arr[midPlus] === 0) {
+            return arr.length - (midPlus);
+        }
+        else if (arr[mid] === 1 && arr[midPlus] === 1) {
+            left = midPlus;
+        }
+        else {
+            right = mid;
+        }
+    }        
 }
 
-module.exports = countZeroes
+module.exports = countZeroes;
