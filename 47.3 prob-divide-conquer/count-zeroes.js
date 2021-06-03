@@ -1,34 +1,37 @@
+
 function countZeroes(arr) {
-    //start with left as arr index 0 and right as last index of arr.
+    //Edge case: check for 1 at the end, no 0s in array
+    if (arr[arr.length - 1] === 1) {
+        return 0
+    }
+
     let left = 0;
     let right = arr.length - 1;
-    
-    /*Edge case: when arr[0] is 0, that means everything after is also 0 */
-    if (arr[left] === 0) {
-        return arr.length;
-    }
-    /*Edge case: if arr[right] is 1, that means everything before is also 1 */
-    if (arr[right] === 1) {
-        return 0;
-    }
-    /*Condition that continues as long as left idx is <= the right */
+
     while (left <= right) {
-        //start by dividing arr in half. left is there to shift the mid value to the appropriate arr idx.
-        let mid = left + Math.floor((right - left) / 2);
-        let midPlus = mid + 1
-        //if the mid value and the midPlus value  meets conditions, we have found where 1 ends and 0 starts
-        if (arr[mid] === 1 && arr[midPlus] === 0) {
-            return arr.length - (midPlus);
+        //middle index in array
+        let midIdx = Math.floor((left + right) / 2);
+        let afterMidIdx = midIdx + 1;
+        
+        //if midIdx & afterMidIdx 1, look right
+        if (arr[midIdx] === 1 && arr[afterMidIdx] === 1) {
+            left = afterMidIdx;
+        } //Where 1 ends and 0 starts
+        else if (arr[midIdx] === 1 && arr[afterMidIdx] === 0) {
+            return( arr.length - afterMidIdx);
+        } //if midIdx and afterMidIdx is 0, shift left
+        else if (arr[midIdx] === 0 && arr[afterMidIdx] === 0){
+            right = midIdx - 1;
+            if (right < 0) {
+                return arr.length - left;
+            }
         }
-        //if the mid and midPlus is 1, shift the 'search window' of left to midPlus so the next loop searches a smaller range
-        else if (arr[mid] === 1 && arr[midPlus] === 1) {
-            left = midPlus;
-        }
-        //if the mid & midPlus is 0, shift the 'search window' of the right to mid, so the next loop searches a smaller range
-        else {
-            right = mid;
-        }
-    }        
+    }
 }
+
+countZeroes([1, 1, 1, 0, 0, 0, 0]) // 4
+countZeroes([0, 0, 0]) // 3
+countZeroes([1, 1, 1, 1]) // 0
+countZeroes([1, 1, 1, 1, 0, 0]) // 2
 
 module.exports = countZeroes;
