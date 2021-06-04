@@ -38,28 +38,38 @@ function leftIdx(arr, val) {
     let right = arr.length - 1;
 
     while (left <= right) {
-        let midIdx = ((left + right) / 2);
-        let midIdxMinus = midIdx - 1;
-        let midIdxPlus = midIdx + 1;
-
-        if (arr[midIdx] === val && arr[midIdxPlus] > val) {
-            return midIdx
-        }
-        else if (arr[midIdx] === val && arr[midIdxMinus] === val) {
-            right = midIdxMinus;
-        }
-        else if (arr[midIdx] < val) {
-            left = midIdx;
+        let midIdx = (left + right) / 2;
+        let midIdxMinus = midIdx - 1; 
+        let midIdxPlus = midIdx + 1; 
+        // if (arr[midIdx] === val) {
+        //     if (arr[midIdxMinus] === val) {
+        //         right = midIdxMinus;
+        //     }
+        // }
+        console.log(midIdxMinus, midIdx, midIdxPlus)
+        if (arr[midIdx] < val) {
+            if (arr[midIdxPlus === val]) {
+                return midIdxPlus;
+            } else {
+               left = midIdx; 
+            }
+            
         }
         else if (arr[midIdx] > val) {
-            right = midIdx
+            if (arr[midIdxMinus === val]) {
+                return midIdxMinus;
+            } else {
+               right = midIdx; 
+            }
+            
+        } else {
+                right = midIdxMinus;
         }
-        else {
-            return -1
-        }
+
     }
-    return -1; 
+    return -1
 }
+
 leftIdx([1, 1, 2, 2, 2, 2, 3], 2)
 
 
