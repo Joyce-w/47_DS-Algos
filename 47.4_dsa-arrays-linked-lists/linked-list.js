@@ -8,7 +8,6 @@ class Node {
 }
 
 /** LinkedList: chained together nodes. */
-
 class LinkedList {
   constructor(vals = []) {
     this.head = null;
@@ -23,7 +22,7 @@ class LinkedList {
   push(val) {
     // create node for a new value
     const newNode = new Node(val);
-    
+
     //check to see if linked list is empty
     if(!this.head){
       //set the first node in the linked list to be the head and tail. Increment count.
@@ -44,13 +43,57 @@ class LinkedList {
   /** unshift(val): add new value to start of list. */
 
   unshift(val) {
+    //create a new node
+    const newNode = new Node(val);
+    //check to see if there is a head
+    if(!this.head){
+      this.head = newNode;
+      this.tail = newNode;
+      this.length +=1;
+    } else{
+    //make newNode's tail the head
+      newNode.next = this.head;
+    //redeclare the head as new Node    
+      this.head = newNode;  
+      this.length +=1;
+    }
 
   }
 
   /** pop(): return & remove last item. */
 
   pop() {
+    //checks to see if there is a head
+    if(this.head){
+      let front = this.head;
+      let nextNode = front.next;
 
+      //check if the next value is null (only one node in linked list)
+      if(front.next === null){
+        let val = front.val;
+        front = null;
+        this.length -=1;
+        this.tail = null;
+        this.head = null;
+        return val;
+      }
+      else {
+        //while the nextNode.next is not null, reassign the front to be the nextNode
+        while(nextNode.next !== null){
+          front = nextNode;
+        }        
+        //if nextNode.next value is null, save the value of nextNode
+        let val = nextNode.val;
+        //remove the node from front 
+        front.next = null;
+        //assign the front as the new tail
+        this.tail = front;
+        //adjust the linked list length;
+        this.length -=1;
+        return val;
+      }
+    }
+    
   }
 
   /** shift(): return & remove first item. */
