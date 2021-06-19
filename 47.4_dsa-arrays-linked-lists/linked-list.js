@@ -99,7 +99,27 @@ class LinkedList {
   /** shift(): return & remove first item. */
 
   shift() {
+    //reassign the head to be the next node
+    let currHead = this.head
+    let nextNode = currHead.next;
 
+    let shiftVal = this.head.val;
+
+    if  (this.length === 0){
+      return;
+    }
+    else if(this.length === 1){
+      //reassign head to be the nextNode
+      this.head = null;
+      this.tail = null;
+      this.length = 0;
+
+      return shiftVal;
+    } else {
+      this.head = nextNode;
+      this.length -=1;
+      return shiftVal;
+    }
   }
 
   /** getAt(idx): get val at idx. */
