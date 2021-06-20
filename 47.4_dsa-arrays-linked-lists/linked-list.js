@@ -143,6 +143,28 @@ class LinkedList {
   /** setAt(idx, val): set val at idx to val */
 
   setAt(idx, val) {
+    //make a new node with val
+    let newNode = new Node(val);
+    
+    if(idx === 0){
+      let temp = this.head;
+      this.head = newNode;
+      newNode.next = this.head;
+      this.head.next = temp;
+      this.length +=1;
+
+    } else {
+      let currIdx = this.head;
+      console.log(currIdx)
+      for (let i = 0; i < idx-1; i++) {
+        currIdx = currIdx.next;
+      }
+      let newNext = currIdx.next;
+      currIdx.next = newNode;
+      newNode.next = newNext;     
+      this.length +=1;
+    }
+
 
   }
 
