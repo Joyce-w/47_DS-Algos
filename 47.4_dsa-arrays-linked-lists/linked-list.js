@@ -171,19 +171,68 @@ class LinkedList {
   /** insertAt(idx, val): add node w/val before idx. */
 
   insertAt(idx, val) {
+    //create new node
+    let newNode = new Node(val);
+    //if linkedlist is empty, insert
+    if(this.length === 0){
+      this.head = newNode;
+      this.tail = newNode;
+      this.length = 1;
+    }
 
+    //keep track of curr node
+    let currNode = this.head;
+    //loop to before index
+    for(let i = 0; i < idx; i++){
+      currNode = currNode.next;
+    }
+    //save value of currNode.next for new Node
+    let newNext = currNode.next;
+    currNode.next = newNode;
+    newNode.next = newNext;
+    this.length +=1;
   }
 
   /** removeAt(idx): return & remove item at idx, */
 
   removeAt(idx) {
+    if (this.length === 1){
+      let returnVal = this.head.val;
+      this.head = null;
+      this.tail = null;
+      this.length = 0;
+      return returnVal;
+    }  else {
+      let currNode = this.head;
+      for (let i = 0; i < idx; i++){
+        currNode = currNode.next;
+      }
+      let newNext = currNode.next.next;
+      let returnVal = currNode.next.val;
+      currNode.next = newNext;
+      this.length -=1;
+      return returnVal;
+    }
 
   }
 
   /** average(): return an average of all values in the list */
 
   average() {
-    
+    let sum = this.head.val;
+    let currNode = this.head;
+
+    if(this.length === 0) {
+      return 0;
+    } else {
+      for(let i = 0; i <= this.length; i++){
+        currNode = currNode.next;
+        let val = currNode.val;
+        sum = sum + val;
+      }
+      return sum / (this.length - 1)      
+    }
+
   }
 }
 
