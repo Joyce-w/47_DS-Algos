@@ -155,7 +155,6 @@ class LinkedList {
 
     } else {
       let currIdx = this.head;
-      console.log(currIdx)
       for (let i = 0; i < idx - 1; i++) {
         currIdx = currIdx.next;
       }
@@ -170,58 +169,71 @@ class LinkedList {
 
   /** insertAt(idx, val): add node w/val before idx. */
 
-  // insertAt(idx, val) {
-  //   //create new node
-  //   let newNode = new Node(val);
+  insertAt(idx, val) {
+    //create new node
+    let newNode = new Node(val);
 
-  //   //keep track of curr node
-  //   let currNode = this.head;
-  //   //if linkedlist is empty, insert
-  //   if(this.length === 0){
-  //     this.head = newNode;
-  //     this.tail = newNode;
-  //     this.length = 1;
-  //   }
+    //keep track of curr node
+    let currNode = this.head;
 
-  //   //insert at end if next idx
-  //   else if (idx === (this.length + 1)) {
-  //     for (let i = 0; i < idx; i++){
-  //       cuurrNode = currNode.next;
-  //     }
-  //     currNode.next = newNode;
-  //     this.tail = newNode
-  //     this.length += 1;
-  //   } else {
-  //     //loop to before index
-  //     for(let i = 0; i < idx - 1; i++){
-  //       currNode = currNode.next;
-  //     }
-  //     console.log(currNode)
-  //     //save value of currNode.next for new Node
-  //     let newNext = currNode.next;
-  //     currNode.next = newNode;
-  //     newNode.next = newNext;
-  //     this.length += 1;
-            
-  //   }
-  // }
+    //if linkedlist is empty, insert
+    if(this.length === 0){
+      this.head = newNode;
+      this.tail = newNode;
+      this.length = 1;
+    }
+    //if the idx is at the end of the array. loop to last node
+    else if (this.length + 1 === idx) {
+      while (currNode.next !== null) {
+        currNode = currNode.next;
+      }
+      currNode.next = newNode;
+      this.tail = newNode;
+      
+    }
+      //for index between linked list, loop until just before idx
+    else {
+      for (let i = 0; i < idx- 1; i++){
+        currNode = currNode.next;
+      }
+      //if there is a next value.
+      if (currNode.next) {
+        //save the next value and assign it to the newNode.next. 
+        let newNext = currNode.next;
+        //assign the newNode to be the currNode.next value; 
+        currNode.next = newNode;
+        newNode.next = newNext;
+        this.length += 1;
+      } else {
+        currNode.next = newNode;
+        this.tail = newNode;
+        this.length += 1;
+      }
+    }
+  }
 
   /** removeAt(idx): return & remove item at idx, */
 
   removeAt(idx) {
+    //if there is only one val, set head/tail to null;
     if (this.length === 1) {
       let returnVal = this.head.val;
       this.head = null;
       this.tail = null;
       this.length = 0;
       return returnVal;
-    } else {
+    }
+    //more than one node, loop until before idx
+    else {
       let currNode = this.head;
       for (let i = 0; i < idx; i++) {
         currNode = currNode.next;
       }
+      //save the next node of the idx that will be deleted;
       let newNext = currNode.next.next;
+      //save the val of the node that wil be deleted
       let returnVal = currNode.next.val;
+      //set the node before target node to have newNext that skips over the deleted node.
       currNode.next = newNext;
       this.length -= 1;
       return returnVal;
