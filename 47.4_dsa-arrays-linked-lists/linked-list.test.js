@@ -97,22 +97,22 @@ describe("setAt", function() {
   });
 });
 
-describe("insertAt", function() {
-  it("inserts node and adjusts nearby nodes", function() {
-    let lst = new LinkedList([5, 10, 15, 20]);
+// describe("insertAt", function() {
+//   it("inserts node and adjusts nearby nodes", function() {
+//     let lst = new LinkedList([5, 10, 15, 20]);
 
-    lst.insertAt(2, 12);
-    expect(lst.length).toBe(5);
-    expect(lst.head.val).toBe(5);
-    expect(lst.head.next.val).toBe(10);
-    expect(lst.head.next.next.val).toBe(12);
-    expect(lst.head.next.next.next.val).toBe(15);
-    expect(lst.head.next.next.next.next.val).toBe(20);
+//     lst.insertAt(2, 12);
+//     expect(lst.length).toBe(5);
+//     expect(lst.head.val).toBe(5);
+//     expect(lst.head.next.val).toBe(10);
+//     expect(lst.head.next.next.val).toBe(12);
+//     expect(lst.head.next.next.next.val).toBe(15);
+//     expect(lst.head.next.next.next.next.val).toBe(20);
 
-    lst.insertAt(5, 25);
-    expect(lst.head.next.next.next.next.next.val).toBe(25);
-    expect(lst.tail.val).toBe(25);
-  });
+//     lst.insertAt(5, 25);
+//     expect(lst.head.next.next.next.next.next.val).toBe(25);
+//     expect(lst.tail.val).toBe(25);
+//   });
 
   // it("inserts into empty list", function() {
   //   let lst = new LinkedList();
@@ -122,7 +122,7 @@ describe("insertAt", function() {
   //   expect(lst.head.val).toBe(5);
   //   expect(lst.tail.val).toBe(5);
   // });
-});
+// });
 
 describe("removeAt", function() {
   it("removes from 1-item list", function() {
