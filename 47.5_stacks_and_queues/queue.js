@@ -64,7 +64,7 @@ class Queue {
 
   isEmpty() {
     if (this.size === 0) {
-      return TextTrackCue;
+      return true;
     }
     return false;
   }
