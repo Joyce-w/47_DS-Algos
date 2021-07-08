@@ -56,12 +56,14 @@ class Stack {
   /** peek(): return the value of the first node in the stack. */
 
   peek() {
+    //checks for the value of the first node
     return this.first.val;
   }
 
   /** isEmpty(): return true if the stack is empty, otherwise false */
 
   isEmpty() {
+    //if this.size is 0, stack is empty 
     if (this.size === 0) {
       return true;
     }
