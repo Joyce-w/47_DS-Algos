@@ -89,10 +89,9 @@ function revString(str, reverse='', i=0) {
 }
 
 // /** gatherStrings: given an object, return an array of all of the string values. */
-
+/**inital solving took 1hr! */
 function gatherStrings(obj, arr = []) {
-  for (const [key, value] of Object.entries(obj)) {
-    console.log(key, typeof (value))
+  for (const value of Object.values(obj)) {
     
     //if it value is a string, push into arr
     if (typeof (value) === "string") {
@@ -100,19 +99,45 @@ function gatherStrings(obj, arr = []) {
     }
     //if value is object, recurse over object
     else if (typeof(value) === "object") {
-      console.log(value)
-        //recursion 
-        return gatherStrings(key, arr)
-    }
-    //after looping, return array
-    //base case
-    return arr;
+
+      //recursion 
+      gatherStrings(value, arr)
+    }    
   }
+  //after looping, return array
+  //base case
+  return arr;
 }
+
+
 // /** binarySearch: given a sorted array of numbers, and a value,
 //  * return the index of that value (or -1 if val is not present). */
+/**inital solving took 8 mins */
+function binarySearch(arr, val, i = 0) {
+  console.log(arr[i], i, arr.length-1)
+  //base case
+  if (i === arr.length) return -1
+  
+  if (arr[i] === val) {
+    return i;
+  }
+  
+  //recursion
+  return binarySearch(arr,val, i+1)
 
-// function binarySearch(arr, val) {
+}
+/**Using the slice method on the array */
+// function binarySearch(arr, val ) {
+//   console.log(arr[0],arr.length-1)
+//   //base case
+//   if (arr.length === 0) return -1
+  
+//   if (arr[0] === val) {
+//     return i;
+//   }
+  
+//   //recursion
+//   return binarySearch(arr.slice(1),val)
 
 // }
 
@@ -124,5 +149,5 @@ module.exports = {
   findIndex,
   revString,
   gatherStrings,
-  // binarySearch
+  binarySearch
 };
