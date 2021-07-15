@@ -20,14 +20,13 @@ function product(nums, i = 0) {
 /** longest: return the length of the longest word in an array of words. */
 function longest(words, temp = 0) {
   //base case return when array is empty
-  console.log(temp, words)
   if (words.length === 0) return temp
   
   //if the current word is greater than temp, reassign
   if (words[0].length > temp) {
     temp = words[0].length;
   }
-  //recursion case is 
+ 
   return longest(words.slice(1), temp)    
 
 }
@@ -35,34 +34,81 @@ function longest(words, temp = 0) {
 
 // /** everyOther: return a string with every other letter. */
 
-// function everyOther(str) {
-
-// }
+function everyOther(str, i = 0, newStr='') {
+  //base case
+  if (str.length === i) return newStr;
+  
+  //every other starting from index 0, add to the new Str
+  if (i % 2 == 0) {
+  newStr = newStr + str[i]
+  }
+  //recursion
+  return everyOther(str, i+1, newStr)
+}
 
 // /** isPalindrome: checks whether a string is a palindrome or not. */
+//word is the same spelled from & backwards
 
-// function isPalindrome(str) {
+/**inital solving took 30 minutes */
+function isPalindrome(str, i=0) {
 
-// }
+  //base case 
+  if (str.length === i) return true
+
+  //recursion, need something to check from last index
+  if (str[i] !== str[(str.length - 1) - i]) {
+    return false
+  }
+  
+  return isPalindrome(str, i+1)
+}
 
 // /** findIndex: return the index of val in arr (or -1 if val is not present). */
+/**inital solving took <5  mins */
+function findIndex(arr, val, i=0) {
+  //base case
+  if (i === arr.length) return -1;
 
-// function findIndex(arr, val) {
-
-// }
+  if (arr[i] === val) {
+    return i
+  }
+  //recursion 
+  return findIndex(arr, val, i+1)
+}
 
 // /** revString: return a copy of a string, but in reverse. */
+/**inital solving took 4 mins */
+function revString(str, reverse='', i=0) {
+  //base
+  if (i === str.length) return reverse
 
-// function revString(str) {
+  reverse = reverse + str[(str.length - 1) - i]
 
-// }
+  //recursion
+  return revString(str, reverse, i+1)
+}
 
 // /** gatherStrings: given an object, return an array of all of the string values. */
 
-// function gatherStrings(obj) {
-
-// }
-
+function gatherStrings(obj, arr = []) {
+  for (const [key, value] of Object.entries(obj)) {
+    console.log(key, typeof (value))
+    
+    //if it value is a string, push into arr
+    if (typeof (value) === "string") {
+      arr.push(value)
+    }
+    //if value is object, recurse over object
+    else if (typeof(value) === "object") {
+      console.log(value)
+        //recursion 
+        return gatherStrings(key, arr)
+    }
+    //after looping, return array
+    //base case
+    return arr;
+  }
+}
 // /** binarySearch: given a sorted array of numbers, and a value,
 //  * return the index of that value (or -1 if val is not present). */
 
@@ -72,11 +118,11 @@ function longest(words, temp = 0) {
 
 module.exports = {
   product,
-  longest
-  // everyOther,
-  // isPalindrome,
-  // findIndex,
-  // revString,
-  // gatherStrings,
+  longest,
+  everyOther,
+  isPalindrome,
+  findIndex,
+  revString,
+  gatherStrings,
   // binarySearch
 };
