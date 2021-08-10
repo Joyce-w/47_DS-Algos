@@ -26,33 +26,52 @@ class Tree {
       //pop the most recently added node, and check for value and children
       //if no children will go to the next 'top' value in toVisitStack
       const current = toVisitStack.pop();
-      //check if there is an empty stack
-      if (!current) {
+      //check if there is an empty stack, return sum if none
+      if (current === null) {
         return sum;
       }
-      sum += current.val;
-      //if current has children add them to stack
-      if (current.children) {
-        for (let child of current.children) {
-          toVisitStack.push(child)
-        }
+      else {
+        //if current has children add them to stack
+        if (current.children) {
+          for (let child of current.children) {
+            toVisitStack.push(child)
+          }
+        }        
       }
+      sum += current.val;
     }
     //return the sum once every node is visited
     return sum;
   }
-    //start from the bottom and end at the root, checking if there is anything in the stack
-    
 
-    //goes through every node
-    //every node we get its value
-    //pops off when passed over
-  
 
   /** countEvens(): count all of the nodes in the tree with even values. */
 
   countEvens() {
-
+    //initialize a count
+    let count = 0;
+    let toCountStack = [this.root]
+    while (toCountStack.length) {
+      //pop value off stack
+      let current = toCountStack.pop();
+      // if the stack is null than return the count
+      if (current === null) {
+        return count;
+      }
+      else {
+        if (current.children) {
+          //add children to stack if any
+          for (let child of current.children) {
+            toCountStack.push(child)
+          }
+        }
+          //check for evenness at every current node
+          if (current.val % 2 === 0) {
+            count += 1;
+          }        
+      }
+    }
+    return count;
   }
 
   /** numGreater(lowerBound): return a count of the number of nodes
@@ -61,6 +80,7 @@ class Tree {
   numGreater(lowerBound) {
 
   }
+
 }
 
 // let htmlEl = new TreeNode('html',
@@ -72,7 +92,12 @@ class Tree {
 //     ])
 
 
-// let test = new Tree(htmlEl)
 
+//   let nSmall = new TreeNode(1);
+//   let nSmall2 = new TreeNode(2);
+//   nSmall.children.push(nSmall2);
+// let smallTree = new Tree(nSmall);
+  
+  
 
 module.exports = { Tree, TreeNode };
