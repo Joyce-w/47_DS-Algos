@@ -27,7 +27,6 @@ class BinaryTree {
       return depth;
     }
 
-    
     //loop while there is something in the queue
     while (queue.length) {
       //keep track of nodes;
@@ -58,80 +57,27 @@ class BinaryTree {
    * the length of the longest path from the root to a leaf. */
 
   maxDepth() {
-    //initalize depth
-    let depth = 0;
-    //initalize queue
-    let queue = [this.root];
 
-    //loop while there is something in the queue
-    while (queue.length) {
-      //keep track of the current nodes in a level
-      let numOfNodes = queue.length;
+    //check to see if there is root
+    if (this.root === null) return 0;
 
-      //loop while there are nodes in the queue
-      while (numOfNodes > 0) {
-        console.log(numOfNodes)
-        console.log(numOfNodes)
-        //get the first in the queue
-        let current = queue.shift();
-
-        //check to see if the current is a leaf
-        if (current.left === null && current.right === null) {
-          depth++;
-        }
-        //check if there is a left branch
-        if (current.left !== null) {
-          queue.push(current.left)
-        }
-        //check if there is a right branch 
-        if (current.right !== null) {
-          queue.push(current.right)
-        }
-
-        console.log(queue)        
-        numOfNodes--;
-        
+    function findDepth(node) {
+      if (node.left === null && node.right=== null) {
+        return 1;
       }
+      //If no left, run findDepth on right
+      if (node.left === null) {
+        return findDepth(node.right) + 1
+      }
+      if (node.right === null) {
+        return findDepth(node.left) + 1;
+      }
+      return (findDepth(node.left) > findDepth(node.right) ? findDepth(node.left) : findDepth(node.right) + 1)
+      //If no right, run findDepth on left
     }
-    return depth;
+    return findDepth(this.root)
+
   }
-  // maxDepth() {
-  //   //initalize depth
-  //   let depth = 0;
-  //   //initalize queue
-  //   let queue = [this.root];
-
-  //   //loop while there is something in the queue
-  //   while (queue.length) {
-  //     //keep track of the current nodes in a level
-  //     let numOfNodes = queue.length;
-
-  //     //loop while there are nodes in the queue
-  //     while (numOfNodes > 0) {
-  //       console.log(numOfNodes)
-  //       //get the first in the queue
-  //       let current = queue.shift();
-
-  //       //check to see if the current is a leaf
-  //       if (current.left === null && current.right === null) {
-  //         depth++;
-  //       }
-  //       //check if there is a left branch
-  //       if (current.left !== null) {
-  //         queue.push(current.left)
-  //       }
-  //       //check if there is a right branch 
-  //       if (current.right !== null) {
-  //         queue.push(current.right)
-  //       }
-
-  //       console.log(queue)        
-  //       numOfNodes--;
-        
-  //     }
-  //   }
-  //   return depth;
-  // }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
    * The path doesn't need to start at the root, but you can't visit a node more than once. */
