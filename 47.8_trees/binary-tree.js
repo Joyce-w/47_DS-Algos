@@ -17,43 +17,39 @@ class BinaryTree {
    * the length of the shortest path from the root to a leaf. */
 
   minDepth() {
+
     //initialize a count 
     let depth = 0;
     //keep track of the queue
     let queue = [this.root];
-
     //check if tree is empty
     if (this.root === null) {
-      return 0;
+      return depth;
     }
-    //loop as long as there is a something in length
-    while (queue.length) {
-      //keep track of how many nodes there are in a level
-      let numNodes = queue.length;
-      //while there are nodes, loop
-      while (numNodes > 0) {
 
-        //grabs the first item in queue
+    
+    //loop while there is something in the queue
+    while (queue.length) {
+      //keep track of nodes;
+      let numOfNodes = queue.length;
+      while (numOfNodes > 0) {
         let current = queue.shift();
-        console.log(current)
-        //check if current is a leaf, it has no children
-        if (current.left === null && current.right === null) {
+        //check if there are any children
+        if (queue.left === null && queue.right === null) {
           depth++;
           return depth;
         }
-
-        if (current.left !== null) {
-          queue.push(current.left);
+        //if there is a left, push
+        if (current.left) {
+          queue.push(current.left)
         }
-        if (current.right !== null) {
-          queue.push(current.right)
+        //if there is a right, push
+        if (current.left) {
+          queue.push(current.left)
         }
-        //get rid of node because we already checked
-        numNodes--;
+        numOfNodes--;
       }
-      //increase the depth of the current tree once a 'level' has gone through 
-      depth++
-
+      depth++;
     }
     return depth;
   }
@@ -62,8 +58,80 @@ class BinaryTree {
    * the length of the longest path from the root to a leaf. */
 
   maxDepth() {
-    
+    //initalize depth
+    let depth = 0;
+    //initalize queue
+    let queue = [this.root];
+
+    //loop while there is something in the queue
+    while (queue.length) {
+      //keep track of the current nodes in a level
+      let numOfNodes = queue.length;
+
+      //loop while there are nodes in the queue
+      while (numOfNodes > 0) {
+        console.log(numOfNodes)
+        console.log(numOfNodes)
+        //get the first in the queue
+        let current = queue.shift();
+
+        //check to see if the current is a leaf
+        if (current.left === null && current.right === null) {
+          depth++;
+        }
+        //check if there is a left branch
+        if (current.left !== null) {
+          queue.push(current.left)
+        }
+        //check if there is a right branch 
+        if (current.right !== null) {
+          queue.push(current.right)
+        }
+
+        console.log(queue)        
+        numOfNodes--;
+        
+      }
+    }
+    return depth;
   }
+  // maxDepth() {
+  //   //initalize depth
+  //   let depth = 0;
+  //   //initalize queue
+  //   let queue = [this.root];
+
+  //   //loop while there is something in the queue
+  //   while (queue.length) {
+  //     //keep track of the current nodes in a level
+  //     let numOfNodes = queue.length;
+
+  //     //loop while there are nodes in the queue
+  //     while (numOfNodes > 0) {
+  //       console.log(numOfNodes)
+  //       //get the first in the queue
+  //       let current = queue.shift();
+
+  //       //check to see if the current is a leaf
+  //       if (current.left === null && current.right === null) {
+  //         depth++;
+  //       }
+  //       //check if there is a left branch
+  //       if (current.left !== null) {
+  //         queue.push(current.left)
+  //       }
+  //       //check if there is a right branch 
+  //       if (current.right !== null) {
+  //         queue.push(current.right)
+  //       }
+
+  //       console.log(queue)        
+  //       numOfNodes--;
+        
+  //     }
+  //   }
+  //   return depth;
+  // }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
    * The path doesn't need to start at the root, but you can't visit a node more than once. */
@@ -111,10 +179,13 @@ class BinaryTree {
 }
 
 
-  // // build small tree;
-  // let smallLeft = new BinaryTreeNode(5);
-  // let smallRight = new BinaryTreeNode(5);
-  // let smallRoot = new BinaryTreeNode(6, smallLeft, smallRight);
-  // let smallTree = new BinaryTree(smallRoot);
+  let node6 = new BinaryTreeNode(1);
+  let node5 = new BinaryTreeNode(1);
+  let node4 = new BinaryTreeNode(2);
+  let node3 = new BinaryTreeNode(3, node4, node6);
+  let node2 = new BinaryTreeNode(5, node3, node5);
+  let node1 = new BinaryTreeNode(5);
+  let root = new BinaryTreeNode(6, node1, node2);
+  largeTree = new BinaryTree(root);
 
 module.exports = { BinaryTree, BinaryTreeNode };
