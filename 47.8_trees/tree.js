@@ -78,26 +78,35 @@ class Tree {
    * whose value is greater than lowerBound. */
 
   numGreater(lowerBound) {
-
+    //initialize a count to keepe track of the nodes
+    let count = 0;
+    //keep track of nodes in a stack
+    let stack = [this.root];
+    //loop through the stack
+    while (stack.length) {
+      //keep track of the current node
+      let current = stack.pop();
+    //if the stack is empty return the count
+      if (current === null) {
+        return count;
+      }
+    //else check for any children and push to stack if so.
+      else {
+        if (current.children) {
+          for (let child of current.children) {
+            stack.push(child)
+          }
+        }
+        //check if the current val is greater than lowerBound, add to count 
+        if (current.val > lowerBound) {
+          count += 1;
+        }
+      }  
+    }
+    console.log(count)
+    return count;
   }
 
 }
-
-// let htmlEl = new TreeNode('html',
-//     [new TreeNode('head',
-//             [new TreeNode('title')]),
-//         new TreeNode('body',
-//             [new TreeNode('ul',
-//                 [new TreeNode('li'), new TreeNode('li2'), new TreeNode('li3')])])
-//     ])
-
-
-
-//   let nSmall = new TreeNode(1);
-//   let nSmall2 = new TreeNode(2);
-//   nSmall.children.push(nSmall2);
-// let smallTree = new Tree(nSmall);
-  
-  
 
 module.exports = { Tree, TreeNode };

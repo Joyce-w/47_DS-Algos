@@ -17,14 +17,52 @@ class BinaryTree {
    * the length of the shortest path from the root to a leaf. */
 
   minDepth() {
+    //initialize a count 
+    let depth = 0;
+    //keep track of the queue
+    let queue = [this.root];
 
+    //check if tree is empty
+    if (this.root === null) {
+      return 0;
+    }
+    //loop as long as there is a something in length
+    while (queue.length) {
+      //keep track of how many nodes there are in a level
+      let numNodes = queue.length;
+      //while there are nodes, loop
+      while (numNodes > 0) {
+
+        //grabs the first item in queue
+        let current = queue.shift();
+        console.log(current)
+        //check if current is a leaf, it has no children
+        if (current.left === null && current.right === null) {
+          depth++;
+          return depth;
+        }
+
+        if (current.left !== null) {
+          queue.push(current.left);
+        }
+        if (current.right !== null) {
+          queue.push(current.right)
+        }
+        //get rid of node because we already checked
+        numNodes--;
+      }
+      //increase the depth of the current tree once a 'level' has gone through 
+      depth++
+
+    }
+    return depth;
   }
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
    * the length of the longest path from the root to a leaf. */
 
   maxDepth() {
-
+    
   }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
@@ -71,5 +109,12 @@ class BinaryTree {
     
   }
 }
+
+
+  // // build small tree;
+  // let smallLeft = new BinaryTreeNode(5);
+  // let smallRight = new BinaryTreeNode(5);
+  // let smallRoot = new BinaryTreeNode(6, smallLeft, smallRight);
+  // let smallTree = new BinaryTree(smallRoot);
 
 module.exports = { BinaryTree, BinaryTreeNode };
