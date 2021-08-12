@@ -14,13 +14,28 @@ class BinarySearchTree {
   /** insert(val): insert a new node into the BST with value val.
    * Returns the tree. Uses iteration. */
 
-  insert(val) {
-    //check if there is a root
-    if (!this.root) return null; v
-    //find the value that is directly less than val
+  insert(nodeVal) {
+    //if there is no root, add one 
+    if(!this.root) this.root = new Node(nodeVal);
 
-    //find the value that is directly more than val
+    //traverse if there is a node pre order
+    function traverse(node = this.root){
+      
+      //check to see if val is smaller than root
+      if(node.val > nodeVal){
+        node.left ? traverse(node.left) : node.left = new Node(nodeVal);
+      }
+        if(node.val < nodeVal){
+          node.left ? traverse(node.right) : node.right = new Node(nodeVal);
+        }  
+        console.log(node)     
+    }
+    
+    traverse(this.root)
+  
   }
+   
+  
 
   /** insertRecursively(val): insert a new node into the BST with value val.
    * Returns the tree. Uses recursion. */
