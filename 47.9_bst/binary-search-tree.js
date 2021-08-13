@@ -20,12 +20,13 @@ class BinarySearchTree {
     //if there is a root, make note of current
     else {
       let current = this.root;
+      //while there is a root, loop
       while (current) {
         //check if the val is greater than val, if so move left
         if (current.val > nodeVal) {
-          if (current.left) {
+          if (current.left) { /*if there is a left check go to the next left */
             current = current.left;
-          } else {
+          } else { /*if no left, insert the node to the left of the current node*/
             current.left = new Node(nodeVal)
             return this;
           }
@@ -42,8 +43,6 @@ class BinarySearchTree {
       }
     }
   }
-   
-  
 
   /** insertRecursively(val): insert a new node into the BST with value val.
    * Returns the tree. Uses recursion. */
@@ -71,7 +70,19 @@ class BinarySearchTree {
    * return the node, if found; else undefined. Uses iteration. */
 
   find(val) {
-
+    let current = this.root;
+    if (!current) return undefined;
+    if (current.val === val) return current;
+    while (current) {
+      //check if new current is val
+      if (current.val === val) return current;
+      //check if current is more than val, go left;
+      if (current.val > val) {
+        current = current.left;
+      } else { /*if current.val is less than val*/
+        current = current.right;
+      }
+    }
   }
 
   /** findRecursively(val): search the tree for a node with value val.
