@@ -91,9 +91,6 @@ class BinarySearchTree {
   findRecursively(val) {
 
     function findVal(currentNode) {
-      console.log('this root', currentNode)
-      console.log('this val', val)
-
       //return undefined if no root
       if (!currentNode) return undefined;
       
@@ -119,26 +116,76 @@ class BinarySearchTree {
 
   dfsPreOrder() {
 
+    //keep track of visited arrays
+    let nodeArray = [];
+    //loop while there is a stack
+    function preOrderTraverse(node) {
+      console.log(node, nodeArray)
+      //add current 
+      nodeArray.push(node.val);
+      //if there is a left traverse left
+      node.left && preOrderTraverse(node.left)
+      //if there is a right, traverse right
+      node.right && preOrderTraverse(node.right)
+    }
+    
+    preOrderTraverse(this.root)
+    return nodeArray
   }
 
   /** dfsInOrder(): Traverse the array using in-order DFS.
    * Return an array of visited nodes. */
 
   dfsInOrder() {
-
+    let nodeArray = [];
+      function inOrderTraverse(node) {
+        //traverse left if left
+        node.left && inOrderTraverse(node.left)
+        //push to array when no more lefts
+        nodeArray.push(node.val)
+        //traverse right if right
+        node.right && inOrderTraverse(node.right)
+    }
+    
+    inOrderTraverse(this.root);
+    return nodeArray;
   }
 
   /** dfsPostOrder(): Traverse the array using post-order DFS.
    * Return an array of visited nodes. */
 
   dfsPostOrder() {
+    let nodeArray = [];
 
+    function postOrderTraverse(node) {
+      //if there is a left, traverse left
+      node.left && postOrderTraverse(node.left)
+      //if there is a right, traverse right
+      node.right && postOrderTraverse(node.right)
+      //add node val to array if no left/right
+      nodeArray.push(node.val)
+    }
+    postOrderTraverse(this.root)
+    return nodeArray;
   }
 
   /** bfs(): Traverse the array using BFS.
    * Return an array of visited nodes. */
 
   bfs() {
+    let nodeArray = [];
+    //create a queue
+    let queue = [this.root];
+
+    //keep track of nodes
+    let numNodes = queue    
+    while (queue.length) {
+      
+      const current = queue.shift();
+      if (current.val === val) {
+        return current
+      }
+    }
 
   }
 
