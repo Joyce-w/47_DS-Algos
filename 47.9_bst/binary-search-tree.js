@@ -15,24 +15,32 @@ class BinarySearchTree {
    * Returns the tree. Uses iteration. */
 
   insert(nodeVal) {
-    //if there is no root, add one 
-    if(!this.root) this.root = new Node(nodeVal);
-
-    //traverse if there is a node pre order
-    function traverse(node = this.root){
-      
-      //check to see if val is smaller than root
-      if(node.val > nodeVal){
-        node.left ? traverse(node.left) : node.left = new Node(nodeVal);
+    //add node as root if no root
+    if (!this.root) this.root = new Node(nodeVal);
+    //if there is a root, make note of current
+    else {
+      let current = this.root;
+      while (current) {
+        //check if the val is greater than val, if so move left
+        if (current.val > nodeVal) {
+          if (current.left) {
+            current = current.left;
+          } else {
+            current.left = new Node(nodeVal)
+            return this;
+          }
+        }
+        //check if the val is less than val, if so move right
+        if (current.val < nodeVal) {
+          if (current.right) {
+            current = current.right;
+          } else {
+            current.right = new Node(nodeVal)
+            return this
+          }
+        }
       }
-        if(node.val < nodeVal){
-          node.left ? traverse(node.right) : node.right = new Node(nodeVal);
-        }  
-        console.log(node)     
     }
-    
-    traverse(this.root)
-  
   }
    
   
@@ -40,8 +48,23 @@ class BinarySearchTree {
   /** insertRecursively(val): insert a new node into the BST with value val.
    * Returns the tree. Uses recursion. */
 
-  insertRecursively(val) {
+  insertRecursively(nodeVal) {
+    //if there is no root, add one 
+    if(!this.root) this.root = new Node(nodeVal);
 
+    //traverse if there is a node pre order
+    function traverse(node = this.root){
+      
+      //check to see if val is smaller than root
+      if (node.val > nodeVal) {
+        node.left ? traverse(node.left) : node.left = new Node(nodeVal);
+      }
+      if (node.val < nodeVal) {
+          node.left ? traverse(node.right) : node.right = new Node(nodeVal);
+      }  
+  
+    }
+    traverse(this.root)
   }
 
   /** find(val): search the tree for a node with value val.
