@@ -98,7 +98,7 @@ class BinarySearchTree {
       if (!currentNode) return undefined;
       
       //return if the current root is the same as the val
-      if (currentNode.val === val) console.log('current node same as val',currentNode) ;
+      if (currentNode.val === val) return currentNode;
       //check if current val is larger than val
       if (currentNode.val > val) {
 
@@ -111,7 +111,7 @@ class BinarySearchTree {
       } 
     }
     
-    findVal(this.root)
+    return findVal(this.root)
   }
 
   /** dfsPreOrder(): Traverse the array using pre-order DFS.
