@@ -90,6 +90,28 @@ class BinarySearchTree {
 
   findRecursively(val) {
 
+    function findVal(currentNode) {
+      console.log('this root', currentNode)
+      console.log('this val', val)
+
+      //return undefined if no root
+      if (!currentNode) return undefined;
+      
+      //return if the current root is the same as the val
+      if (currentNode.val === val) console.log('current node same as val',currentNode) ;
+      //check if current val is larger than val
+      if (currentNode.val > val) {
+
+        return findVal(currentNode.left)
+      }
+      //check if current val is smaller than val
+      if (currentNode.val < val) {
+
+        return findVal(currentNode.right)
+      } 
+    }
+    
+    findVal(this.root)
   }
 
   /** dfsPreOrder(): Traverse the array using pre-order DFS.
