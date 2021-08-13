@@ -133,20 +133,19 @@ describe("dfsPostOrder", function() {
   });
 });
 
-// describe("BFS", function() {
-//   it("should return the correct output", function() {
-//     let binarySearchTree = new BinarySearchTree();
-//     binarySearchTree
-//       .insert(15)
-//       .insert(20)
-//       .insert(10)
-//       .insert(12)
-//       .insert(1)
-//       .insert(5)
-//       .insert(50);
-//     expect(binarySearchTree.bfs()).toEqual([15, 10, 20, 1, 12, 50, 5]);
-//   });
-// });
+describe("BFS", function() {
+  it("should return the correct output", function() {
+    let binarySearchTree = new BinarySearchTree();
+      binarySearchTree.insert(15)
+      binarySearchTree.insert(20)
+      binarySearchTree.insert(10)
+      binarySearchTree.insert(12)
+      binarySearchTree.insert(1)
+      binarySearchTree.insert(5)
+      binarySearchTree.insert(50);
+    expect(binarySearchTree.bfs()).toEqual([15, 10, 20, 1, 12, 50, 5]);
+  });
+});
 
 // describe("remove", function() {
 //   it("remove should correctly remove a node with no children", function() {

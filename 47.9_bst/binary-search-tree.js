@@ -173,20 +173,21 @@ class BinarySearchTree {
    * Return an array of visited nodes. */
 
   bfs() {
-    let nodeArray = [];
-    //create a queue
+    //keep track of the queue
     let queue = [this.root];
-
-    //keep track of nodes
-    let numNodes = queue    
+    let nodeArray = [];
+    //while there is a queue, loop
     while (queue.length) {
-      
-      const current = queue.shift();
-      if (current.val === val) {
-        return current
-      }
+      //find first layer
+      let current = queue.shift();
+      //add the current visiting node to stack
+      nodeArray.push(current.val)
+      console.log('node array', nodeArray)
+      //if left and right, add to queue
+      if (current.left) queue.push(current.left);
+      if (current.right) queue.push(current.right);      
     }
-
+    return nodeArray;
   }
 
   /** Further Study!
