@@ -47,6 +47,7 @@ class Graph {
     //use queue to keep track of list starting from 'start'
     // let toVisitQueue = [start];
     // let seen = new Set();
+    let result = [start.value];
     function depthSearch(start, seen = new Set([start])) {
 
       //iterate thru adjacents
@@ -56,17 +57,47 @@ class Graph {
         if (!seen.has(neighbor)) {
           //add to seen
           seen.add(neighbor)
+          result.push(neighbor.value)
         //recurse thru the neighbor
         depthSearch(neighbor, seen)          
         }
       }
       return seen
     }
-    return depthSearch(start)
+    depthSearch(start)
+
+    return result
   }
 
   // this function returns an array of Node values using BFS
-  breadthFirstSearch(start) {}
+  breadthFirstSearch(start) {
+    //holds the values of nodes that were visited
+    let result = [];
+    //makes sure a node was not visited more than once
+    let visited = new Set();
+    //queue to make sure nodes are visited BFS
+    let toVisitQueue = [start]
+    
+    let current;
+    visited.add(start);
+    //loop while there is something in queue
+    while (toVisitQueue.length) {
+      //find first node of queue
+      current = toVisitQueue.shift()
+      console.log(current)
+      result.push(current.value);
+
+      //loop adjacent and check if they were seen, if not add to queue
+      current.adjacent.forEach(neighbor => {
+        if (!visited.has(neighbor)) {
+          visited.add(neighbor)
+          toVisitQueue.push(neighbor)
+        }
+      })
+    }
+
+    return result;
+  }
 }
 
 module.exports = {Graph, Node}
